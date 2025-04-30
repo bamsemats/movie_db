@@ -40,7 +40,10 @@ export default function Header({toggleShowFavorites, returnToPopular, returnHome
         />
         <span className='favorites-tooltip'>Favorites</span>
       </div>
-      <h1 className='title'>Movie Library</h1>
+      <h1 
+        className='title'
+        onClick={returnHome}
+      >Movie Library</h1>
       <div className='search-bar'>
         <input type='text' placeholder='Search...' className='search-input' id='search-input' onChange={(e) => {updateSearch(e.target.value)}}/>
       </div>
