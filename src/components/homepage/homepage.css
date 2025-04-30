@@ -32,12 +32,6 @@
   .home-page-article a:visited {
     color: rgba(13, 86, 169, 0.8);
   }
-  .themoviedb-link {
-
-  }
-  .themoviedb-api-link {
-
-  }
 }
 
 @media (width > 600px) { 
@@ -72,11 +66,5 @@
   }
   .home-page-article a:visited {
     color: rgba(13, 86, 169, 0.8);
-  }
-  .themoviedb-link {
-
-  }
-  .themoviedb-api-link {
-
   }
 }

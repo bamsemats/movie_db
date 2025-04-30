@@ -83,7 +83,7 @@ export default function MovieCards({movies, addFavorite, favorites, showFavorite
 
   // ** THIS CODE WAS 'OPTIMIZED' BY COPILOT I.E. 'CHEATING' **
   return (
-    <div>
+    <div className='movie-card-wrapper'>
     <div 
       className='movie-card-grid'
     >
