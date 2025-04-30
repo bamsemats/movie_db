@@ -2,14 +2,29 @@ import { GetPopular } from "../services/get-popular";
 import React, { useEffect, useState } from 'react';
 import './movie-cards.css';
 import { FaHeart } from "react-icons/fa";
+import Modals from "../modals/modals";
 
-export default function MovieCards({movies, addFavorite, favorites, showFavorites, currentSearch}) {
+
+export default function MovieCards({movies, addFavorite, favorites, showFavorites, currentSearch, openModal, closeModal, modalOpen, openDialog}) {
 
   function showCard(movie) {
     return (
-      <div className='movie-card-container' key={movie.id}>
-        <div className='movie-card-header'>
-          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt='Movie Poster' className='movie-poster'/>
+      <div 
+        className='movie-card-container' 
+        key={movie.id} 
+        id={movie.id}
+      >
+        <div 
+          className='movie-card-header'
+          style={{filter: modalOpen !== '' ? 'blur(5px) grayscale(1)' : ''}}
+        >
+          <img 
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
+            alt='Movie Poster' 
+            className='movie-poster'
+            data-ignore='true'
+            onClick={() => {openModal(movie.id)}}
+          />
           <FaHeart 
             className='like-button' 
             onClick={() => addFavorite(movie)}
@@ -18,10 +33,21 @@ export default function MovieCards({movies, addFavorite, favorites, showFavorite
             }}
           />
         </div>
-        <div className='movie-card-body'>
+        <div
+          className='movie-card-body'
+          style={{filter: modalOpen !== '' ? 'blur(5px) grayscale(1)' : ''}}
+        >
           <p>{`${movie.original_title} (${movie.release_date && movie.release_date.substring(0, 4)})`}</p>
           <p>{movie.vote_average} / 10 <strong>{`(${movie.vote_count} votes)`}</strong></p>
         </div>
+        <Modals 
+          movie={movie} 
+          openModal={openModal} 
+          closeModal={closeModal}
+          scaleState={{scale: modalOpen === movie.id ? 1 : 0}}
+          addFavorite={addFavorite}
+          favorites={favorites}
+        />
       </div>
     )
   }
@@ -58,7 +84,9 @@ export default function MovieCards({movies, addFavorite, favorites, showFavorite
   // ** THIS CODE WAS 'OPTIMIZED' BY COPILOT I.E. 'CHEATING' **
   return (
     <div>
-    <div className='movie-card-grid'>
+    <div 
+      className='movie-card-grid'
+    >
       {(showFavorites ? favorites : movies)
         .filter((movie) =>
           currentSearch === '' ||

@@ -1,8 +1,9 @@
 import './header.css';
 import { MdLocalMovies } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 
-export default function Header({toggleShowFavorites, returnHome, searchUpdate, showFavorites, updateSearch}) {
+export default function Header({toggleShowFavorites, returnToPopular, returnHome, searchUpdate, showFavorites, updateSearch}) {
 
   function handleMouseEnter(prop) {
     const tooltip = document.querySelector(`.${prop}`);
@@ -16,11 +17,18 @@ export default function Header({toggleShowFavorites, returnHome, searchUpdate, s
   return (
     <header className='header-container'>
       <div className='header-logo'>
+        <FaHome 
+          className='home-image'
+          onMouseEnter={() => handleMouseEnter('home-tooltip')}
+          onMouseLeave={() => handleMouseLeave('home-tooltip')}
+          onClick={returnHome}
+        />
+        <span className='home-tooltip'>Home</span>
         <MdLocalMovies 
           className='logo-image' 
           onMouseEnter={() => handleMouseEnter('movies-tooltip')}
           onMouseLeave={() => handleMouseLeave('movies-tooltip')}
-          onClick={returnHome}
+          onClick={returnToPopular}
         />
         <span className='movies-tooltip'>Popular</span>
         <FaHeart 
