@@ -150,7 +150,13 @@ function App() {
         updateSearch={updateSearch}
         showFavorites={showFavorites}
       />
-      {loading ? <h1 className="loading-insert">Loading...</h1> : null}
+      {loading ? (
+        <h1 className="loading-insert">
+          Loading... <br></br>
+          <br></br>
+          {`API needs time to wake up - refresh page if this takes too long`}
+        </h1>
+      ) : null}
       {showHomePage ? <HomePage currentSearch={currentSearch} /> : null}
       <MovieCards
         movies={movies}

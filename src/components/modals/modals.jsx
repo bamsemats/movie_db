@@ -30,7 +30,7 @@ export default function Modals({movie, openModal, closeModal, modalOpen, scaleSt
     getMovieActors();
   }, []);
 
-  const movieGenres = movie.genre_ids.map((id) => genres.map((genre) => {
+  const movieGenres = movie.genre_ids?.map((id) => genres.map((genre) => {
     return (
       genre.id === id ? `${genre.name} ` : null
     )
