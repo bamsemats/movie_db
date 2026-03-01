@@ -1,52 +1,52 @@
 import './header.css';
-import { MdLocalMovies } from "react-icons/md";
-import { FaHeart } from "react-icons/fa";
-import { FaHome } from "react-icons/fa";
+import { MdLocalMovies, MdSearch } from "react-icons/md";
+import { FaHeart, FaHome } from "react-icons/fa";
 
-export default function Header({toggleShowFavorites, returnToPopular, returnHome, searchUpdate, showFavorites, updateSearch}) {
-
-  function handleMouseEnter(prop) {
-    const tooltip = document.querySelector(`.${prop}`);
-    tooltip.style.opacity = '1';
-  };
-
-  function handleMouseLeave(prop) {
-    const tooltip = document.querySelector(`.${prop}`);
-    tooltip.style.opacity = '0';
-  };
+export default function Header({
+  toggleShowFavorites,
+  returnToPopular,
+  returnHome,
+  showFavorites,
+  updateSearch
+}) {
   return (
     <header className='header-container'>
-      <div className='header-logo'>
-        <FaHome 
-          className='home-image'
-          onMouseEnter={() => handleMouseEnter('home-tooltip')}
-          onMouseLeave={() => handleMouseLeave('home-tooltip')}
-          onClick={returnHome}
-        />
-        <span className='home-tooltip'>Home</span>
-        <MdLocalMovies 
-          className='logo-image' 
-          onMouseEnter={() => handleMouseEnter('movies-tooltip')}
-          onMouseLeave={() => handleMouseLeave('movies-tooltip')}
-          onClick={returnToPopular}
-        />
-        <span className='movies-tooltip'>Popular</span>
-        <FaHeart 
-          className='heart-image'
-          onMouseEnter={() => handleMouseEnter('favorites-tooltip')}
-          onMouseLeave={() => handleMouseLeave('favorites-tooltip')}
-          onClick={toggleShowFavorites}
-          style={{color: showFavorites ? 'red' : 'white'}}
-        />
-        <span className='favorites-tooltip'>Favorites</span>
+      <div className='header-logo' onClick={returnHome}>
+        <MdLocalMovies className='logo-image' style={{ color: 'var(--accent-color)' }} />
+        <h1 className='title'>Movie Library</h1>
       </div>
-      <h1 
-        className='title'
-        onClick={returnHome}
-      >Movie Library</h1>
-      <div className='search-bar'>
-        <input type='text' placeholder='Search...' className='search-input' id='search-input' onChange={(e) => {updateSearch(e.target.value)}}/>
+
+      <div className='nav-actions'>
+        <div className='search-container'>
+          <MdSearch className='search-icon' size={20} />
+          <input 
+            type='text' 
+            placeholder='Search movies...' 
+            className='search-input' 
+            onChange={(e) => updateSearch(e.target.value)}
+          />
+        </div>
+
+        <div className='nav-icons'>
+          <button className='icon-button' onClick={returnHome}>
+            <FaHome size={20} />
+            <span className='tooltip'>Home</span>
+          </button>
+          
+          <button className='icon-button' onClick={returnToPopular}>
+            <MdLocalMovies size={20} />
+            <span className='tooltip'>Popular</span>
+          </button>
+          
+          <button 
+            className={`icon-button ${showFavorites ? 'active' : ''}`} 
+            onClick={toggleShowFavorites}
+          >
+            <FaHeart size={20} style={{ color: showFavorites ? 'var(--danger-color)' : 'inherit' }} />
+            <span className='tooltip'>Favorites</span>
+          </button>
+        </div>
       </div>
     </header>
-  )
+  );
 }

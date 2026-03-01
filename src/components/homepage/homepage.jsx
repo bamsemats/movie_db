@@ -1,30 +1,24 @@
 import './homepage.css';
-import {useState, useEffect} from 'react';
 
-export default function HomePage({currentSearch}) {
-  const [displayControl, setDisplayControl] = useState('relative');
-  
+export default function HomePage({ currentSearch }) {
+  // If there's a search query, we hide the homepage content
+  if (currentSearch !== '') return null;
 
-  useEffect(() => {
-    const homePageDiv = document.querySelector('.home-page-container');
-    setDisplayControl((prev) => 
-      homePageDiv.style.scale === '0' ? 'none' : 'block'
-    );
-  }, [currentSearch])
-  console.log(displayControl);
-  
   return (
-    <div className='home-page-container' style={{scale: currentSearch === '' ? '1' : '0', display: displayControl}}>
+    <div className='home-page-container fade-in'>
       <div className='home-page-div'>
         <h1 className='home-page-title'>
-          Welcome to my Move Library website!
+          Explore Your Favorite Movies
         </h1>
-        <article className='home-page-article'>
-          This website was developed as a hobby project for my own benefit, as a means to practice web development. I am a self-taught aspiring web developer, currently learning JavaScript using React as my library/framework. 
-
-          All data was collected from <a href='https://www.themoviedb.org/' className='themoviedb-link'>The Movie Data Base</a> using their <a href='https://developer.themoviedb.org/reference/intro/getting-started' className='themoviedb-api-link'>API</a>. 
-        </article>
+        <p className='home-page-article'>
+          Welcome to the Movie Library. This project is a showcase of modern web development 
+          practices using React. Browse through popular titles, search for your favorites, 
+          and build your own personal collection.
+        </p>
+        <p className='home-page-article'>
+          Data provided by <a href='https://www.themoviedb.org/' target="_blank" rel="noopener noreferrer">The Movie Database (TMDB)</a>.
+        </p>
       </div>
     </div>
-  )
+  );
 }
